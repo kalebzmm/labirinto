@@ -1,8 +1,10 @@
 import queue
 import os
 import time
+from playsound import playsound
 
 clear = lambda: os.system('cls')
+cheeses = {}
 
 def pathPrettyPrint(path):
     return path.replace('U', '↑').replace('R', '→').replace('D', '↓').replace('L', '←')
@@ -49,8 +51,11 @@ def valid(maze, start, moves):
             return False
         elif isWall(maze[y][x]):
             return False
-        # elif isCheese(maze[y][x]):
-        #     print('🧀')
+        elif isCheese(maze[y][x]):
+            key = str(x) + str(y)
+            if(not key in cheeses):
+                cheeses[key] = True
+                playsound('./burp.mp3')
 
     return True
 
